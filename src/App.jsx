@@ -17,22 +17,8 @@ class App extends Component {
       formData: {
         username: '',
       },
-      repitems: [
-        {id: 1, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 2, name: 'Installation', content: 'You can install React from npm.'},
-        {id: 3, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 4, name: 'Installation', content: 'You can install React from npm.'},
-        {id: 5, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 6, name: 'Installation', content: 'You can install React from npm.'}
-      ],
-      staritems: [
-        {id: 1, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 2, name: 'Installation', content: 'You can install React from npm.'},
-        {id: 3, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 4, name: 'Installation', content: 'You can install React from npm.'},
-        {id: 5, name: 'Hello World', content: 'Welcome to learning React!'},
-        {id: 6, name: 'Installation', content: 'You can install React from npm.'}
-      ],
+      repitems: null,
+      staritems: null,
       itemstest: [
         {id: 1, name: 'Hello World', content: 'Welcome to learning React!'},
         {id: 2, name: 'Installation', content: 'You can install React from npm.'},
@@ -95,10 +81,11 @@ class App extends Component {
         <ProfileDetails infoclean={this.state.infoclean}/>
         <hr></hr>
         List of Repos goes here
-        <ul><SortedList repitems={this.state.repitems}/></ul>
+        <SortedList repitems={this.state.repitems}/>
         <hr></hr>
         List of Stars goes here
-        <ul><SortedList repitems={this.state.staritems}/></ul>
+        <SortedList repitems={this.state.staritems}/>
+
         <hr></hr>
         <b>Information:</b>
         <pre>{this.state.info}</pre>

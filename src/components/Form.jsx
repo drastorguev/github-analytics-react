@@ -2,7 +2,6 @@ import React from 'react';
 
 const Form = (props) => {
   return (
-
     <form onSubmit={(event) => props.handleUserFormSubmit(event)}>
       <label>
         <p>Search:</p>
@@ -21,7 +20,6 @@ const Form = (props) => {
       />
     </div>
     </form>
-
   )};
 
 export default Form;
