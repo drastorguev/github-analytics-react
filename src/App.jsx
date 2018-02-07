@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Form from './components/Form.jsx';
 import SortedList from './components/SortedList.jsx';
+import ProfileDetails from './components/ProfileDetails.jsx';
+
 
 
 class App extends Component {
@@ -10,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       gitun: 'No username',
+      infoclean : '',
       info: '',
       formData: {
         username: '',
@@ -49,6 +52,7 @@ class App extends Component {
     axios.get('https://api.github.com/users/'+this.state.formData.username)
     .then(response => this.setState({
       gitun: response.data.login,
+      infoclean: response.data,
       info : JSON.stringify(response.data, undefined, 2)
     })).catch((err) => { console.log(err); });
 
@@ -87,14 +91,15 @@ class App extends Component {
           handleFormChange={this.handleFormChange}
         />
         <hr></hr>
+        Profile Details:
+        <ProfileDetails infoclean={this.state.infoclean}/>
+        <hr></hr>
         List of Repos goes here
-        <SortedList repitems={this.state.repitems}/>
+        <ul><SortedList repitems={this.state.repitems}/></ul>
         <hr></hr>
         List of Stars goes here
-        <SortedList repitems={this.state.staritems}/>
+        <ul><SortedList repitems={this.state.staritems}/></ul>
         <hr></hr>
-        <p><b>Username:</b></p>
-        <p>{this.state.gitun}</p>
         <b>Information:</b>
         <pre>{this.state.info}</pre>
 
