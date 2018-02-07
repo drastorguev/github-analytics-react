@@ -44,12 +44,16 @@ class App extends Component {
 
     axios.get('https://api.github.com/users/'+this.state.formData.username+'/repos')
     .then(response => this.setState({
-      repitems : response.data.sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
-    })).catch((err) => { console.log(err); });
+      repitems : response.data
+      .filter(({fork}) => fork === false)
+      .sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
+      })).catch((err) => { console.log(err); });
 
     axios.get('https://api.github.com/users/'+this.state.formData.username+'/starred')
     .then(response => this.setState({
-      staritems : response.data.sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
+      staritems : response.data
+      .filter(({fork}) => fork === false)
+      .sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
     })).catch((err) => { console.log(err); });
   };
 
@@ -58,6 +62,8 @@ class App extends Component {
     obj[event.target.name] = event.target.value;
     this.setState(obj);
   };
+
+
 
 
   render() {
@@ -80,12 +86,11 @@ class App extends Component {
         Profile Details:
         <ProfileDetails infoclean={this.state.infoclean}/>
         <hr></hr>
-        List of Repos goes here
+        Own Repositories:
         <SortedList repitems={this.state.repitems}/>
         <hr></hr>
-        List of Stars goes here
+        Starred Repositories:
         <SortedList repitems={this.state.staritems}/>
-
         <hr></hr>
         <b>Information:</b>
         <pre>{this.state.info}</pre>
