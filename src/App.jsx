@@ -4,7 +4,7 @@ import axios from 'axios';
 import Form from './components/Form.jsx';
 import SortedList from './components/SortedList.jsx';
 import ProfileDetails from './components/ProfileDetails.jsx';
-
+import LanguageList from './components/LanguageList.jsx';
 
 
 class App extends Component {
@@ -19,6 +19,7 @@ class App extends Component {
       },
       repitems: null,
       staritems: null,
+      languagecount: {},
       itemstest: [
         {id: 1, name: 'Hello World', content: 'Welcome to learning React!'},
         {id: 2, name: 'Installation', content: 'You can install React from npm.'},
@@ -46,7 +47,22 @@ class App extends Component {
     .then(response => this.setState({
       repitems : response.data
       .filter(({fork}) => fork === false)
-      .sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
+      .sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10),
+      // 
+      //
+      // {
+      //   for (var i = 0; i < {this.state.repitems}.length; i++) {
+      //     this.setState((prevState, props) => {
+      //       return {
+      //         languagecount: {
+      //           {this.state.repitems}[i]['language'] = -~ {this.state.repitems}[i]['language']
+      //         }
+      //       }
+      //     }
+      //   )};
+      // }
+
+
       })).catch((err) => { console.log(err); });
 
     axios.get('https://api.github.com/users/'+this.state.formData.username+'/starred')
@@ -55,15 +71,15 @@ class App extends Component {
       .filter(({fork}) => fork === false)
       .sort((b, a) => (a.watchers_count + a.forks_count) - (b.watchers_count + b.forks_count)).slice(0,10)
     })).catch((err) => { console.log(err); });
+
   };
+
 
   handleFormChange(event) {
     const obj = this.state.formData;
     obj[event.target.name] = event.target.value;
     this.setState(obj);
   };
-
-
 
 
   render() {
@@ -91,6 +107,8 @@ class App extends Component {
         <hr></hr>
         Starred Repositories:
         <SortedList repitems={this.state.staritems}/>
+        <hr></hr>
+        <LanguageList langslist={this.state.languagecount}/>
         <hr></hr>
         <b>Information:</b>
         <pre>{this.state.info}</pre>
