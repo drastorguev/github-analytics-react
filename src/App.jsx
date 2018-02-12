@@ -6,7 +6,7 @@ import SortedList from './components/SortedList.jsx';
 import ProfileDetails from './components/ProfileDetails.jsx';
 import LanguageList from './components/LanguageList.jsx';
 
-var lda = require('lda');
+import lda from './lda';
 
 
 class App extends Component {

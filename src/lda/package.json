@@ -1,0 +1,112 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lda",
+        "scope": null,
+        "escapedName": "lda",
+        "name": "lda",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/dsr/Documents/HustleProjects/github_analytics"
+    ]
+  ],
+  "_from": "lda@latest",
+  "_id": "lda@0.2.0",
+  "_inCache": true,
+  "_location": "/lda",
+  "_nodeVersion": "6.11.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/lda-0.2.0.tgz_1506193813378_0.9372032105457038"
+  },
+  "_npmUser": {
+    "name": "primaryobjects",
+    "email": "kbecker@primaryobjects.com"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lda",
+    "scope": null,
+    "escapedName": "lda",
+    "name": "lda",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/lda/-/lda-0.2.0.tgz",
+  "_shasum": "04dc4e2022d71e5e4d1788a548f1aad9db241e75",
+  "_shrinkwrap": null,
+  "_spec": "lda",
+  "_where": "/Users/dsr/Documents/HustleProjects/github_analytics",
+  "author": {
+    "name": "Kory Becker",
+    "email": "kbecker@primaryobjects.com",
+    "url": "http://www.primaryobjects.com/kory-becker"
+  },
+  "bugs": {
+    "url": "https://github.com/primaryobjects/lda/issues"
+  },
+  "dependencies": {
+    "stem-porter": "*"
+  },
+  "description": "LDA topic modeling for node.js.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "04dc4e2022d71e5e4d1788a548f1aad9db241e75",
+    "tarball": "https://registry.npmjs.org/lda/-/lda-0.2.0.tgz"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "gitHead": "fb7a83d46ef9c43658bce7921f1411ddde65e3ad",
+  "homepage": "https://github.com/primaryobjects/lda#readme",
+  "keywords": [
+    "lda",
+    "Latent Dirichlet allocation",
+    "Latent Dirichlet",
+    "Dirichlet",
+    "machine learning",
+    "ml",
+    "artificial intelligence",
+    "natural language processing",
+    "natural language",
+    "topic model",
+    "topic modeling",
+    "topic modelling",
+    "nlp",
+    "topics",
+    "document",
+    "words"
+  ],
+  "licenses": [
+    {
+      "type": "Apache",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "main": "./lib",
+  "maintainers": [
+    {
+      "name": "primaryobjects",
+      "email": "kbecker@primaryobjects.com"
+    }
+  ],
+  "name": "lda",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/primaryobjects/lda.git"
+  },
+  "scripts": {},
+  "version": "0.2.0"
+}
