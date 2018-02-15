@@ -8,6 +8,7 @@ import LanguageList from './components/LanguageList.jsx';
 
 import lda from './lda';
 
+import { Alert, Grid } from 'react-bootstrap';
 
 class App extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class App extends Component {
     this.state = {
       gitun: 'No username',
       infoclean : '',
-      info: '',
+      info: null,
       formData: {
         username: '',
       },
@@ -126,37 +127,42 @@ class App extends Component {
 
   render() {
     return (
+      <Grid className="container">
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">GitHub Analytics</h1>
+          <h1 className="App-title" className="text-center">GitHub Analytics</h1>
         </header>
-        <p>Link to Medium article + Dmitry Rastorguev's LinkedIn</p>
-        <p className="App-intro">
-          Watch this space...
-        </p>
-        <hr></hr>
+        <Alert bsStyle="warning" className="text-center">
+          <p>Learn how to build your version <a href="https://hackernoon.com/building-github-profile-analytics-using-react-part-1-37e03b0c3366" target="_blank">here</a>. P.S. Don't forget to add author on <a href="https://www.linkedin.com/in/dmitryrastorguev/" target="_blank">LinkedIn</a>  🤗 </p>
+        </Alert>
         <Form
           formData={this.state.formData}
           handleUserFormSubmit={this.handleUserFormSubmit}
           handleFormChange={this.handleFormChange}
         />
         <hr></hr>
-        Profile Details:
-        <ProfileDetails infoclean={this.state.infoclean}/>
-        <hr></hr>
-        Own Repositories:
-        <SortedList repitems={this.state.repitems}/>
-        <hr></hr>
-        Starred Repositories:
-        <SortedList repitems={this.state.staritems}/>
-        <hr></hr>
-        Own Repos Language Count:
-        <LanguageList langslist={this.state.replanguagecount}/>
-         Keywords:  {this.state.keywords}
-        <hr></hr>
-        <b>Information:</b>
-        <pre>{this.state.info}</pre>
+        {
+          this.state.info != null ? <div>
+            Profile Details:
+            <ProfileDetails infoclean={this.state.infoclean}/>
+            <hr></hr>
+            Own Repositories:
+            <SortedList repitems={this.state.repitems}/>
+            <hr></hr>
+            Starred Repositories:
+            <SortedList repitems={this.state.staritems}/>
+            <hr></hr>
+            Own Repos Language Count:
+            <LanguageList langslist={this.state.replanguagecount}/>
+             Keywords:  {this.state.keywords}
+            {/* <hr></hr>
+            <b>Information:</b>
+            <pre>{this.state.info}</pre> */}
+            </div>
+          : <h4 className="text-center"><br/><br/><br/><br/>Please enter username above for results to appear</h4>
+        }
       </div>
+      </Grid>
     );
   }
 }
