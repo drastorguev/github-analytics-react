@@ -10,6 +10,8 @@ import lda from './lda';
 
 import { Alert, Grid } from 'react-bootstrap';
 
+import { Row, Col } from 'react-bootstrap';
+
 class App extends Component {
   constructor() {
     super();
@@ -133,7 +135,7 @@ class App extends Component {
           <h1 className="App-title" className="text-center">GitHub Analytics</h1>
         </header>
         <Alert bsStyle="warning" className="text-center">
-          <p>Learn how to build your version <a href="https://hackernoon.com/building-github-profile-analytics-using-react-part-1-37e03b0c3366" target="_blank">here</a>. P.S. Don't forget to add author on <a href="https://www.linkedin.com/in/dmitryrastorguev/" target="_blank">LinkedIn</a>  🤗 </p>
+          <p>Learn how to build your version <a href="https://hackernoon.com/building-github-profile-analytics-using-react-part-1-37e03b0c3366" target="_blank">here</a>. P.S. Don't forget to add the author on <a href="https://www.linkedin.com/in/dmitryrastorguev/" target="_blank">LinkedIn</a>  🤗 </p>
         </Alert>
         <Form
           formData={this.state.formData}
@@ -143,14 +145,34 @@ class App extends Component {
         <hr></hr>
         {
           this.state.info != null ? <div>
-            Profile Details:
+            <h4>Profile Details</h4>
             <ProfileDetails infoclean={this.state.infoclean}/>
             <hr></hr>
-            Own Repositories:
-            <SortedList repitems={this.state.repitems}/>
+            <Row className="show-grid">
+              <Col xs={12} md={4} className="text-center">
+                <h4>Personal Repositories Summary</h4>
+                <p>Total number of forks</p>
+                <p>Total number of stars</p>
+                <p>List of languages</p>
+                <p>Any other stats?</p>
+              </Col>
+              <Col xs={12} md={8}>
+                <h4>Personal Top 10 Repositories</h4>
+                <SortedList repitems={this.state.repitems}/>
+              </Col>
+            </Row>
             <hr></hr>
-            Starred Repositories:
-            <SortedList repitems={this.state.staritems}/>
+            <Row className="show-grid">
+              <Col xs={12} md={4} className="text-center">
+                <h4>Starred Repositories Summary</h4>
+                <p>Keywords</p>
+                <p>Any other stats?</p>
+              </Col>
+              <Col xs={12} md={8} >
+                <h4>User's Most Popular Starred Repositories</h4>
+                <SortedList repitems={this.state.staritems}/>
+              </Col>
+            </Row>
             <hr></hr>
             Own Repos Language Count:
             <LanguageList langslist={this.state.replanguagecount}/>
