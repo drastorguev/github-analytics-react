@@ -5,6 +5,8 @@ import Form from './components/Form.jsx';
 import SortedList from './components/SortedList.jsx';
 import ProfileDetails from './components/ProfileDetails.jsx';
 import LanguageList from './components/LanguageList.jsx';
+import RepoStats from './components/RepoStats.jsx';
+import Keywords from './components/Keywords.jsx';
 
 import lda from './lda';
 
@@ -53,6 +55,10 @@ class App extends Component {
     axios.get('https://api.github.com/users/'+this.state.formData.username+'/repos')
     .then(response => {
 
+      this.setState({
+        replanguagecount: null
+      })
+
       var itemsWithFalseForks = response.data.filter(item => item.fork === false)
 
       var sortedItems = itemsWithFalseForks.sort((b,a) => {
@@ -65,14 +71,38 @@ class App extends Component {
         }
       })
 
+      let totalforks = 0;
+      let totalwatchers = 0;
       let dictrlc = Object.assign({}, this.state.replanguagecount);
       for (var i = 0; i < itemsWithFalseForks.length; i++) {
           dictrlc[itemsWithFalseForks[i]['language']] = -~ dictrlc[itemsWithFalseForks[i]['language']]
+          totalforks = totalforks + itemsWithFalseForks[i]['forks_count']
+          totalwatchers = totalwatchers + itemsWithFalseForks[i]['watchers_count']
       }
+
+      let dictrlcclean = [];
+      let iterarray = Object.entries(dictrlc)
+      for (var n = 0; n < iterarray.length; n++) {
+        dictrlcclean.push(
+          Object.assign({},
+          {lang: iterarray[n][0], count: iterarray[n][1]}))
+      }
+
+      var dictrlccleansorted = dictrlcclean.sort((b,a) => {
+        if (a.count < b.count) {
+          return -1
+        }else if (a.count > b.count){
+          return 1
+        }else {
+          return 0
+        }
+      })
 
       this.setState({
         repitems: sortedItems.slice(0,10),
-        replanguagecount: dictrlc,
+        replanguagecount: dictrlccleansorted,
+        totalforks: totalforks,
+        totalwatchers: totalwatchers
       })
 
     }).catch((err) => { console.log(err); })
@@ -112,8 +142,10 @@ class App extends Component {
 
       this.setState({
         staritems: sortedItems.slice(0,10),
-        keywords: Array.from(keywords).join(', ')
+        keywords: Array.from(keywords)
       })
+
+      // console.log(Array.from(keywords))
 
     }).catch((err) => { console.log(err); })
 
@@ -151,10 +183,11 @@ class App extends Component {
             <Row className="show-grid">
               <Col xs={12} md={4} className="text-center">
                 <h4>Personal Repositories Summary</h4>
-                <p>Total number of forks</p>
-                <p>Total number of stars</p>
-                <p>List of languages</p>
-                <p>Any other stats?</p>
+                <RepoStats totalforks={this.state.totalforks}
+                totalwatchers={this.state.totalwatchers}/>
+                <p><b>Used Languages</b></p>
+                <LanguageList
+                  langslist={this.state.replanguagecount}/>
               </Col>
               <Col xs={12} md={8}>
                 <h4>Personal Top 10 Repositories</h4>
@@ -165,8 +198,8 @@ class App extends Component {
             <Row className="show-grid">
               <Col xs={12} md={4} className="text-center">
                 <h4>Starred Repositories Summary</h4>
-                <p>Keywords</p>
-                <p>Any other stats?</p>
+                <p><b>Keywords</b></p>
+                <Keywords keywords={this.state.keywords}/>
               </Col>
               <Col xs={12} md={8} >
                 <h4>User's Most Popular Starred Repositories</h4>
@@ -174,9 +207,6 @@ class App extends Component {
               </Col>
             </Row>
             <hr></hr>
-            Own Repos Language Count:
-            <LanguageList langslist={this.state.replanguagecount}/>
-             Keywords:  {this.state.keywords}
             {/* <hr></hr>
             <b>Information:</b>
             <pre>{this.state.info}</pre> */}
